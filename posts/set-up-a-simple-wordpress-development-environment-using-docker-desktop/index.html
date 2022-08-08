@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>Set-Up A Simple WordPress Development Environment Using Docker Desktop | ddmboss</title>
+    <meta name="description" content="Live, Love, Laugh, Learn" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+    <link rel="stylesheet" href="https://ddmboss.github.io/style.main.min.c34e6915a95f1027dad7b48e5d1ff6e2bbf58b4e72c69d7ec6ac8e7352e961dc.css" />
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        
+            <a class="site-nav-logo" href="https://ddmboss.github.io/">ddmboss</a>
+        
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="/about/">About</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="/posts/">Blog</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="/tags/">Tags</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="/under-the-hood/">Under the Hood</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+
+                
+                    
+                    <section class="post-full-tags">
+                        <a href="/tags/docker">Docker</a>
+                    </section>
+                
+
+                <h1 class="post-full-title">Set-Up A Simple WordPress Development Environment Using Docker Desktop</h1>
+
+                
+                    <p class="post-full-custom-excerpt">Hey there, today I’m going to walk you through how to setup a basic WordPress Development environment using Docker.</p>
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+    <li class="author-list-item">
+        <div class="author-card">
+            <div class="author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></div>
+            <div class="author-info">
+                <div class="author-info">
+                    <h2>Delano Maloney</h2>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="author-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+    </li>
+</ul>
+
+                        <section class="post-full-byline-meta">
+                            
+                                <h4 class="author-name">Delano Maloney</h4>
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2021-1210-10">15 October 2021</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 3 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+            <figure class="post-full-image">
+                <img src="/uploads/posts/wordpress-docker.png" alt="Set-Up A Simple WordPress Development Environment Using Docker Desktop" />
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <h3 id="what-is-docker">What is Docker?</h3>
+<blockquote>
+<p>Docker is an open platform for developing, shipping, and running applications.</p>
+</blockquote>
+<p>If you’ve done any sort of web development before, you know the hassle of having to setup a dev environment just for a single project, and all the mess that comes with dealing with XAMPP and other such software.</p>
+<p>Docker makes it easy by bundling everything together in self-contained containers, which means you can run multiple different versions of the same app on the same device without any headaches.</p>
+<h3 id="so-how-do-you-get-started">So how do you get started?</h3>
+<p><strong>Step 1.</strong> Head to docker.com/get-started and download the latest version for your device, also ensure that you have Visual Studio Code installed.</p>
+<p><img src="/uploads/posts/Screenshot-2021-10-15-190210.png" alt="Sreenshot-1"></p>
+<p><strong>Step 2.</strong> Once Docker Desktop is installed and running, you want to now create a folder to hold the project files. For this tutorial I will use the folder <em><strong>wp-dev</strong></em>.</p>
+<p><strong>Step 3.</strong> Once the folder is created open the folder inside of Visual Studio Code. Create a file called <em><strong>docker-compose.yml</strong></em></p>
+<p>Inside the <em><strong>docker-compose.yml</strong></em> file insert the following code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3.7&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">wordpress</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">wordpress:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">unless-stopped</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">8001</span>:<span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">db</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_DB_HOST</span>: <span style="color:#ae81ff">db</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_DB_NAME</span>: <span style="color:#ae81ff">${DB_NAME}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_DB_USER</span>: <span style="color:#ae81ff">${DB_USER}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_DB_PASSWORD</span>: <span style="color:#ae81ff">${DB_PASSWORD}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">wordpress:/var/www/html</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./wordpress/wp-content:/var/www/html/wp-content</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./wordpress.ini:/usr/local/etc/php/conf.d/wordpress.ini</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">db</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mariadb:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">unless-stopped</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_DATABASE</span>: <span style="color:#ae81ff">${DB_NAME}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_USER</span>: <span style="color:#ae81ff">${DB_USER}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_PASSWORD</span>: <span style="color:#ae81ff">${DB_PASSWORD}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_RANDOM_ROOT_PASSWORD</span>: <span style="color:#e6db74">&#39;1&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">db:/var/lib/mysql</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">adminer</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">adminer:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">unless-stopped</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">8002</span>:<span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">db</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">wordpress</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">db</span>:
+</span></span></code></pre></div><p>The code creates three services: WordPress, DB, and Adminer. As you can guess DB, refers to the Database System that WordPress will use to store user and plugin data. Adminer acts in the same way as phpmyadmin, which is that it allows you to access and interact with the WordPress database, and of course WordPress.</p>
+<p>This configuration creates a local wp-content folder inside the wp-dev on your machine that allows you easy access to themes and plugin files.</p>
+<p><strong>Step 4.</strong> Create a <em><strong>.env</strong></em> file in the same directory as your docker-compose.yml file</p>
+<p>A .env file allows you to reuse information in docker-compose files without needing to individually re-enter information like database names and passwords.</p>
+<p>Insert the following to your <em><strong>.env</strong></em> file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SH" data-lang="SH"><span style="display:flex;"><span>DB_NAME<span style="color:#f92672">=</span>wp-dev-db
+</span></span><span style="display:flex;"><span>DB_USER<span style="color:#f92672">=</span>wp-dev-user
+</span></span><span style="display:flex;"><span>DB_PASSWORD<span style="color:#f92672">=</span>wp-dev-pass
+</span></span></code></pre></div><p><strong>Step 5.</strong> Create a <em><strong>wordpress.ini</strong></em> configuration file</p>
+<p>This file allows you to override the default php configuration file, so that you can upload larger files or even extend the time scripts can run for before throwing an error.</p>
+<p>Insert the following lines to your <em><strong>wordpress.ini</strong></em> file</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-INI" data-lang="INI"><span style="display:flex;"><span><span style="color:#a6e22e">file_uploads</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">On</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">upload_max_filesize</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">128M</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">post_max_size</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">128M</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">memory_limit</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">256M</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">max_execution_time</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">300</span>
+</span></span></code></pre></div><p><strong>Step 6.</strong> Start your stack.</p>
+<p>Once you’ve completed all the steps above now its time to run your stack. Thankfully Visual Studio Code has a handy terminal window at the bottom.</p>
+<p><img src="/uploads/posts/Screenshot-2021-10-15-195528.png" alt="Sreenshot-2"></p>
+<p>Simply head to the terminal window and enter the following command</p>
+<p><code>docker-compose up -d</code></p>
+<p>Once everything is finished you can now head to your local WordPress url in a browser, which should be <em><strong>[your-device-ip]:8001</strong></em>, and complete the usual WordPress installation.</p>
+<p><img src="/uploads/posts/Screenshot-2021-10-15-200123.png" alt="Sreenshot-3"></p>
+<p>Some commands that might come in handy as you get better</p>
+<p><code>docker-compose up -d --force-recreate --remove-orphans</code></p>
+<p><strong>–force-recreate</strong> forces the existing container to be recreated so that any changes to the configuration or <em><strong>.env</strong></em> file are implemented when it starts again.</p>
+<p><strong>–remove-orphans</strong> removes containers that are no longer used by the docker-compose file.</p>
+<p><strong>Conclusion:</strong> If you’ve made it this far then congratulations you’ve just created your first docker stack.</p>
+
+                </div>
+            </section>
+
+        </article>
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+    
+    <article class="read-next-card">
+        <header class="read-next-card-header">
+            <h3><span>More in</span> <a href="/tags/docker">Docker</a></h3>
+        </header>
+        <div class="read-next-card-content">
+            <ul>
+                
+            </ul>
+        </div>
+    </article>
+<article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="https://ddmboss.github.io/posts/welcome-to-my-blog/">
+                <img class="post-card-image"src="/uploads/posts/IMG_20210716_110612-scaled.jpg" alt="Welcome To My Blog"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="https://ddmboss.github.io/posts/welcome-to-my-blog/">
+    
+                <header class="post-card-header">
+                    
+                        
+                        <div class="post-card-primary-tag">Blog</div>
+                    
+
+                    <h2 class="post-card-title">Welcome To My Blog</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>Hello There, My name is Delano Maloney, and this is blog. Seeing as this is the first post, I can’t really promise anything, but hopefully it has a long and fun life.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Delano Maloney</div>
+                            <a href="#" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Delano Maloney</span>
+                        <span class="post-card-byline-date"><time datetime="2021-1210-10">8 October 2021</time>
+                            <span class="bull">&bull;</span> 1 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            <article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="https://ddmboss.github.io/posts/advanced-wordpress-development-environment-with-docker-traefik-and-redis/">
+                <img class="post-card-image"src="/uploads/posts/wordpress-docker.png" alt="Advanced WordPress Development Environment with Docker, Traefik, and Redis"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="https://ddmboss.github.io/posts/advanced-wordpress-development-environment-with-docker-traefik-and-redis/">
+    
+                <header class="post-card-header">
+                    
+                        
+                        <div class="post-card-primary-tag">Docker</div>
+                    
+
+                    <h2 class="post-card-title">Advanced WordPress Development Environment with Docker, Traefik, and Redis</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>Hey there, today I&rsquo;m going to walk you through how to setup an advanced WordPress development environment, using Docker, Traefik, and Redis.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Delano Maloney</div>
+                            <a href="#" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Delano Maloney</span>
+                        <span class="post-card-byline-date"><time datetime="2022-31-01">2 January 2022</time>
+                            <span class="bull">&bull;</span> 5 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://ddmboss.github.io/">ddmboss</a> &copy; 2021</section>
+                <nav class="site-footer-nav">
+                    <a href="https://ddmboss.github.io/">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/ddmboss" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://github.com/ddmboss" target="_blank" rel="noopener">Github</a>
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

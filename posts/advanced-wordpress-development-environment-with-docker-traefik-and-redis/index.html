@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>Advanced WordPress Development Environment with Docker, Traefik, and Redis | ddmboss</title>
+    <meta name="description" content="Live, Love, Laugh, Learn" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+    <link rel="stylesheet" href="https://ddmboss.github.io/style.main.min.c34e6915a95f1027dad7b48e5d1ff6e2bbf58b4e72c69d7ec6ac8e7352e961dc.css" />
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        
+            <a class="site-nav-logo" href="https://ddmboss.github.io/">ddmboss</a>
+        
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="/about/">About</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="/posts/">Blog</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="/tags/">Tags</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="/under-the-hood/">Under the Hood</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+
+                
+                    
+                    <section class="post-full-tags">
+                        <a href="/tags/docker">Docker</a>
+                    </section>
+                
+
+                <h1 class="post-full-title">Advanced WordPress Development Environment with Docker, Traefik, and Redis</h1>
+
+                
+                    <p class="post-full-custom-excerpt">Hey there, today I&rsquo;m going to walk you through how to setup an advanced WordPress development environment, using Docker, Traefik, and Redis.</p>
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+    <li class="author-list-item">
+        <div class="author-card">
+            <div class="author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></div>
+            <div class="author-info">
+                <div class="author-info">
+                    <h2>Delano Maloney</h2>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="author-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+    </li>
+</ul>
+
+                        <section class="post-full-byline-meta">
+                            
+                                <h4 class="author-name">Delano Maloney</h4>
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2022-31-01">2 January 2022</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 5 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+            <figure class="post-full-image">
+                <img src="/uploads/posts/wordpress-docker.png" alt="Advanced WordPress Development Environment with Docker, Traefik, and Redis" />
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>I&rsquo;m going to assume you have some experience with Docker and so will be glossing over alot of stuff.</p>
+<p>First Up, <strong>Traefik</strong></p>
+<p>Traefik in this setup is being used as a reverse proxy which allows us to run multiple services on our server without having to expose a ton of ports, and it handles things like ssl and domain configuration for our services.</p>
+<p>Create a new <strong>docker-compose.yml</strong> file</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3.8&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">traefik</span>:
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">image</span>: <span style="color:#ae81ff">traefik:latest</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>     - <span style="color:#ae81ff">80</span>:<span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>     - <span style="color:#ae81ff">443</span>:<span style="color:#ae81ff">443</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">command</span>:
+</span></span><span style="display:flex;"><span>     - --<span style="color:#ae81ff">accesslog</span>
+</span></span><span style="display:flex;"><span>     - --<span style="color:#ae81ff">log.level=INFO</span>
+</span></span><span style="display:flex;"><span>     - --<span style="color:#ae81ff">api.dashboard=true</span>
+</span></span><span style="display:flex;"><span>     - --<span style="color:#ae81ff">api.insecure=true</span>
+</span></span><span style="display:flex;"><span>     - --<span style="color:#ae81ff">providers.docker=true</span>
+</span></span><span style="display:flex;"><span>     - --<span style="color:#ae81ff">providers.docker.exposedbydefault=false</span>
+</span></span><span style="display:flex;"><span>     - --<span style="color:#ae81ff">entrypoints.web.address=:80</span>
+</span></span><span style="display:flex;"><span>     - --<span style="color:#ae81ff">entrypoints.web-secure.address=:443</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">#- --certificatesresolvers.letsencrypt.acme.tlschallenge=true</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">#- --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">#- --certificatesresolvers.letsencrypt.acme.email=admin@wpdev.test</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">#- --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>     - <span style="color:#ae81ff">/var/run/docker.sock:/var/run/docker.sock</span>
+</span></span><span style="display:flex;"><span>     - <span style="color:#ae81ff">traefik:/letsencrypt</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>     - <span style="color:#ae81ff">traefik.enable=true</span>
+</span></span><span style="display:flex;"><span>     - <span style="color:#ae81ff">traefik.http.routers.api.rule=Host(`${TRAEFIK_URL}`)</span>
+</span></span><span style="display:flex;"><span>     - <span style="color:#ae81ff">traefik.http.routers.api.entrypoints=web</span>
+</span></span><span style="display:flex;"><span>     - <span style="color:#ae81ff">traefik.http.routers.api.service=api@internal</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">#- traefik.http.services.traefik.loadbalancer.server.port=8080</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">#- traefik.http.routers.api.entrypoints=web-secure</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">#- traefik.http.routers.api.tls=true</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">#- traefik.http.routers.api.tls.certresolver=letsencrypt</span>
+</span></span></code></pre></div><p>Next up <strong>WordPress</strong></p>
+<p>WordPress - Blogging platform</p>
+<p>However I have added the additional configs, that I tent to add to a site to boost its performance, and I often test dev sites with these settings enabled so I know how a theme or plugin behaves before going public.</p>
+<p>In the <strong>docker-compose.yml</strong> file add</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">wordpress</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">wordpress:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">mariadb</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">redis</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">expose</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">443</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_DB_HOST</span>: <span style="color:#ae81ff">mariadb</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_DB_NAME</span>: <span style="color:#ae81ff">${WP_DB_NAME}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_DB_USER</span>: <span style="color:#ae81ff">${WP_DB_USER}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_DB_PASSWORD</span>: <span style="color:#ae81ff">${WP_DB_PASSWORD}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_TABLE_PREFIX</span>: <span style="color:#ae81ff">${WP_DB_PREFIX}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_CONFIG_EXTRA</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;WP_HOME&#39;, &#39;http://${WP_WWW_URL}/&#39; );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;WP_SITEURL&#39;, &#39;http://${WP_WWW_URL}/&#39; );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;WP_REDIS_HOST&#39;, &#39;redis&#39; );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;WP_REDIS_PORT&#39;, 6379 );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;COMPRESS_CSS&#39;, true );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;COMPRESS_SCRIPTS&#39;, true );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;CONCATENATE_SCRIPTS&#39;, true );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;ENFORCE_GZIP&#39;, true );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;AUTOSAVE_INTERVAL&#39;, 120 );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;WP_POST_REVISIONS&#39;, 10);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;EMPTY_TRASH_DAYS&#39;, 30 );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;IMAGE_EDIT_OVERWRITE&#39;, true );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;DISALLOW_FILE_EDIT&#39;, true );</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">wordpress:/var/www/html</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./wordpress/wp-content:/var/www/html/wp-content</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./wordpress.ini:/usr/local/etc/php/conf.d/wordpress.ini</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.enable=true</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.http.routers.wordpress.rule=Host(`${WP_URL}`, `${WP_WWW_URL}`)</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.http.routers.wordpress.entrypoints=web</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.wordpress.middlewares=redirect-to-https@docker</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.wordpress-secure.rule=Host(`${WP_URL}`, `${WP_WWW_URL}`)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.wordpress-secure.entrypoints=web-secure</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.wordpress-secure.tls.certresolver=letsencrypt</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">expose</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">443</span>
+</span></span></code></pre></div><p>This is refering to the default internal port of the docker image and is not publicly accessible, in this use case it mainly serves to document the port being used.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">wordpress:/var/www/html</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">./wordpress/wp-content:/var/www/html/wp-content</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">./wordpress.ini:/usr/local/etc/php/conf.d/wordpress.ini</span>
+</span></span></code></pre></div><p>Volumes are where your wordpress content is stored. <code>./</code> Denotes a local folder on the machine, in this case <code>wp-content</code></p>
+<p>The first declaration is for the entire wordpress install.</p>
+<p>Last line allows for custom php settings to be loaded.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">traefik.enable=true</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">traefik.http.routers.wordpress.rule=Host(`${WP_URL}`, `${WP_WWW_URL}`)</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">traefik.http.routers.wordpress.entrypoints=web</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#- traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#- traefik.http.routers.wordpress.middlewares=redirect-to-https@docker</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#- traefik.http.routers.wordpress-secure.rule=Host(`${WP_URL}`, `${WP_WWW_URL}`)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#- traefik.http.routers.wordpress-secure.entrypoints=web-secure</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#- traefik.http.routers.wordpress-secure.tls.certresolver=letsencrypt</span>
+</span></span></code></pre></div><p><code>labels</code> pass information about the service to <code>traefik</code> so that it can be proxied, services that do not specify a label arent proxied by traefik. The parts that are commented out are for https.</p>
+<p>In the same folder as the <strong>docker-compose.yml</strong> file, create a new file called <strong>wordpress.ini</strong> and paste the following</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-INI" data-lang="INI"><span style="display:flex;"><span><span style="color:#a6e22e">file_uploads</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">On</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">upload_max_filesize</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">128M</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">post_max_size</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">128M</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">memory_limit</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">256M</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">max_execution_time</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">300</span>
+</span></span></code></pre></div><p>Next up <strong>MYSQL</strong> and <strong>Adminer</strong></p>
+<p>WordPress can&rsquo;t function without a database, so lets set that up. Adminer is effectively the same as phpmyadmin, just much lighterweight.</p>
+<p>So in the <strong>docker-compose.yml</strong> file add</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">mariadb</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mariadb:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">expose</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">3306</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_DATABASE</span>: <span style="color:#ae81ff">${WP_DB_NAME}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_USER</span>: <span style="color:#ae81ff">${WP_DB_USER}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_PASSWORD</span>: <span style="color:#ae81ff">${WP_DB_PASSWORD}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_RANDOM_ROOT_PASSWORD</span>: <span style="color:#e6db74">&#39;1&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">mariadb:/var/lib/mysql</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">adminer</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">adminer:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">mariadb</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">expose</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.enable=true</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.http.routers.adminer.rule=Host(`${ADMINER_URL}`)</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.http.routers.adminer.entrypoints=web</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.adminer.middlewares=redirect-to-https@docker</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.adminer-secure.rule=Host(`${ADMINER_URL}`)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.adminer-secure.entrypoints=web-secure</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.adminer-secure.tls.certresolver=letsencrypt</span>
+</span></span></code></pre></div><p>Next create a <strong>.env</strong> file and add the following</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SH" data-lang="SH"><span style="display:flex;"><span><span style="color:#75715e"># WordPress</span>
+</span></span><span style="display:flex;"><span>WP_DB_NAME<span style="color:#f92672">=</span>wp-dev-db
+</span></span><span style="display:flex;"><span>WP_DB_PREFIX<span style="color:#f92672">=</span>wp_
+</span></span><span style="display:flex;"><span>WP_DB_USER<span style="color:#f92672">=</span>wp-dev-user
+</span></span><span style="display:flex;"><span>WP_DB_PASSWORD<span style="color:#f92672">=</span>wp-dev-pass
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Traefik Domains</span>
+</span></span><span style="display:flex;"><span>WP_URL<span style="color:#f92672">=</span>wpdev.test
+</span></span><span style="display:flex;"><span>WP_WWW_URL<span style="color:#f92672">=</span>www.wpdev.test
+</span></span><span style="display:flex;"><span>TRAEFIK_URL<span style="color:#f92672">=</span>traefik.wpdev.test
+</span></span><span style="display:flex;"><span>ADMINER_URL<span style="color:#f92672">=</span>adminer.wpdev.test
+</span></span></code></pre></div><p>Finally lets add <strong>Redis</strong></p>
+<p>Redis is a database cache, to put it as simply as possible.</p>
+<p>In the <strong>docker-compose.yml</strong> file add</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">redis</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">redis:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">expose</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">6379</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">redis-server</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">save 60 1</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">loglevel warning</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">maxmemory 128mb</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">maxmemory-policy allkeys-lru</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">redis:/var/lib/redis</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">redis:/data</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- ./redis.conf:/usr/local/etc/redis/redis.conf</span>
+</span></span></code></pre></div><p><code>./redis.conf:/usr/local/etc/redis/redis.conf</code></p>
+<p>If you want to customize redis beyond the commands that I have added you can load a custom config file and uncomment out this line. Ensure that the file is in the same folder as the docker-compose file.</p>
+<p>Finally at the bottom you decalre all your enabled Volumes</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">traefik</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">wordpress</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">mariadb</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">redis</span>:
+</span></span></code></pre></div><p>At the end your <strong>docker-compose</strong> file should look like this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3.8&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">traefik</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">traefik:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">80</span>:<span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">443</span>:<span style="color:#ae81ff">443</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>:
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">accesslog</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">log.level=INFO</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">api.dashboard=true</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">api.insecure=true</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">providers.docker=true</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">providers.docker.exposedbydefault=false</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">entrypoints.web.address=:80</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">entrypoints.web-secure.address=:443</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- --certificatesresolvers.letsencrypt.acme.tlschallenge=true</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- --certificatesresolvers.letsencrypt.acme.email=admin@wpdev.test</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">/var/run/docker.sock:/var/run/docker.sock</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik:/letsencrypt</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.enable=true</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.http.routers.api.rule=Host(`${TRAEFIK_URL}`)</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.http.routers.api.entrypoints=web</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.http.routers.api.service=api@internal</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.services.traefik.loadbalancer.server.port=8080</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.api.entrypoints=web-secure</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.api.tls=true</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.api.tls.certresolver=letsencrypt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">wordpress</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">wordpress:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">mariadb</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">redis</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">expose</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">443</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_DB_HOST</span>: <span style="color:#ae81ff">mariadb</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_DB_NAME</span>: <span style="color:#ae81ff">${WP_DB_NAME}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_DB_USER</span>: <span style="color:#ae81ff">${WP_DB_USER}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_DB_PASSWORD</span>: <span style="color:#ae81ff">${WP_DB_PASSWORD}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_TABLE_PREFIX</span>: <span style="color:#ae81ff">${WP_DB_PREFIX}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">WORDPRESS_CONFIG_EXTRA</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;WP_HOME&#39;, &#39;http://${WP_WWW_URL}/&#39; );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;WP_SITEURL&#39;, &#39;http://${WP_WWW_URL}/&#39; );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;WP_REDIS_HOST&#39;, &#39;redis&#39; );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;WP_REDIS_PORT&#39;, 6379 );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;COMPRESS_CSS&#39;, true );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;COMPRESS_SCRIPTS&#39;, true );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;CONCATENATE_SCRIPTS&#39;, true );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;ENFORCE_GZIP&#39;, true );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;AUTOSAVE_INTERVAL&#39;, 120 );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;WP_POST_REVISIONS&#39;, 10);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;EMPTY_TRASH_DAYS&#39;, 30 );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;IMAGE_EDIT_OVERWRITE&#39;, true );</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">define( &#39;DISALLOW_FILE_EDIT&#39;, true );</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">wordpress:/var/www/html</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./wordpress/wp-content:/var/www/html/wp-content</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./wordpress.ini:/usr/local/etc/php/conf.d/wordpress.ini</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.enable=true</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.http.routers.wordpress.rule=Host(`${WP_URL}`, `${WP_WWW_URL}`)</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.http.routers.wordpress.entrypoints=web</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.wordpress.middlewares=redirect-to-https@docker</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.wordpress-secure.rule=Host(`${WP_URL}`, `${WP_WWW_URL}`)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.wordpress-secure.entrypoints=web-secure</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.wordpress-secure.tls.certresolver=letsencrypt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">mariadb</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mariadb:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">expose</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">3306</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_DATABASE</span>: <span style="color:#ae81ff">${WP_DB_NAME}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_USER</span>: <span style="color:#ae81ff">${WP_DB_USER}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_PASSWORD</span>: <span style="color:#ae81ff">${WP_DB_PASSWORD}</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_RANDOM_ROOT_PASSWORD</span>: <span style="color:#e6db74">&#39;1&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">mariadb:/var/lib/mysql</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">adminer</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">adminer:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">mariadb</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">expose</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.enable=true</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.http.routers.adminer.rule=Host(`${ADMINER_URL}`)</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">traefik.http.routers.adminer.entrypoints=web</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.adminer.middlewares=redirect-to-https@docker</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.adminer-secure.rule=Host(`${ADMINER_URL}`)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.adminer-secure.entrypoints=web-secure</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- traefik.http.routers.adminer-secure.tls.certresolver=letsencrypt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">redis</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">redis:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">expose</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">6379</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">redis-server</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">save 60 1</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">loglevel warning</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">maxmemory 128mb</span>
+</span></span><span style="display:flex;"><span>      - --<span style="color:#ae81ff">maxmemory-policy allkeys-lru</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">redis:/var/lib/redis</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">redis:/data</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- ./redis.conf:/usr/local/etc/redis/redis.conf</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">traefik</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">wordpress</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">mariadb</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">redis</span>:
+</span></span></code></pre></div><p>Then you go to your terminal and type</p>
+<p><code>docker-compose up -d</code></p>
+<p>You can now visit <strong>WordPress</strong> at the url you set, and proceed through the installation.</p>
+<p>To get <strong>Redis</strong> working with WordPress, you need to download the <strong>Redis Object Cache</strong> plugin.</p>
+<p>Simply goto <strong>Plugins &gt; Add New</strong> and search for <strong>Redis Object Cache</strong> and Install. Then go to <strong>Settings &gt; Redis &gt; Enable Object Cache</strong> you should see</p>
+<p><img src="/uploads/posts/Screenshot-2022-01-02-232428.png" alt="Screenshot"></p>
+
+                </div>
+            </section>
+
+        </article>
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+    
+    <article class="read-next-card">
+        <header class="read-next-card-header">
+            <h3><span>More in</span> <a href="/tags/docker">Docker</a></h3>
+        </header>
+        <div class="read-next-card-content">
+            <ul>
+                
+            </ul>
+        </div>
+    </article>
+<article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="https://ddmboss.github.io/posts/set-up-a-simple-wordpress-development-environment-using-docker-desktop/">
+                <img class="post-card-image"src="/uploads/posts/wordpress-docker.png" alt="Set-Up A Simple WordPress Development Environment Using Docker Desktop"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="https://ddmboss.github.io/posts/set-up-a-simple-wordpress-development-environment-using-docker-desktop/">
+    
+                <header class="post-card-header">
+                    
+                        
+                        <div class="post-card-primary-tag">Docker</div>
+                    
+
+                    <h2 class="post-card-title">Set-Up A Simple WordPress Development Environment Using Docker Desktop</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>Hey there, today I’m going to walk you through how to setup a basic WordPress Development environment using Docker.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Delano Maloney</div>
+                            <a href="#" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Delano Maloney</span>
+                        <span class="post-card-byline-date"><time datetime="2021-1210-10">15 October 2021</time>
+                            <span class="bull">&bull;</span> 3 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            <article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="https://ddmboss.github.io/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/">
+                <img class="post-card-image"src="/uploads/posts/wordpress-docker.png" alt="WordPress Docker Development Set-Up with Traefik, Redis, and Nginx"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="https://ddmboss.github.io/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/">
+    
+                <header class="post-card-header">
+                    
+                        
+                        <div class="post-card-primary-tag">Docker</div>
+                    
+
+                    <h2 class="post-card-title">WordPress Docker Development Set-Up with Traefik, Redis, and Nginx</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>Hey there, today I am going to walk you through setting up a WordPress Development using Docker, Traefik, Redis and Nginx.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Delano Maloney</div>
+                            <a href="#" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Delano Maloney</span>
+                        <span class="post-card-byline-date"><time datetime="2022-11-01">19 January 2022</time>
+                            <span class="bull">&bull;</span> 6 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://ddmboss.github.io/">ddmboss</a> &copy; 2022</section>
+                <nav class="site-footer-nav">
+                    <a href="https://ddmboss.github.io/">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/ddmboss" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://github.com/ddmboss" target="_blank" rel="noopener">Github</a>
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
