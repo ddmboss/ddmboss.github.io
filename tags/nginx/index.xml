@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nginx on ddmboss</title>
-    <link>https://ddmboss.github.io/tags/nginx/</link>
+    <link>https://www.ddmboss.com/tags/nginx/</link>
     <description>Recent content in Nginx on ddmboss</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright © Delano Maloney; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 19 Jan 2022 13:25:41 +0800</lastBuildDate><atom:link href="https://ddmboss.github.io/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jan 2022 13:25:41 +0800</lastBuildDate><atom:link href="https://www.ddmboss.com/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WordPress Docker Development Set-Up with Traefik, Redis, and Nginx</title>
-      <link>https://ddmboss.github.io/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/</link>
+      <link>https://www.ddmboss.com/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/</link>
       <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
       
-      <guid>https://ddmboss.github.io/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/</guid>
+      <guid>https://www.ddmboss.com/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/</guid>
       <description>Hey there, today I am going to walk you through setting up a WordPress Development using Docker, Traefik, Redis and Nginx.</description>
     </item>
     

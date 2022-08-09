@@ -2,36 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker Compose on ddmboss</title>
-    <link>https://ddmboss.github.io/tags/docker-compose/</link>
+    <link>https://www.ddmboss.com/tags/docker-compose/</link>
     <description>Recent content in Docker Compose on ddmboss</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright © Delano Maloney; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 19 Jan 2022 13:25:41 +0800</lastBuildDate><atom:link href="https://ddmboss.github.io/tags/docker-compose/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jan 2022 13:25:41 +0800</lastBuildDate><atom:link href="https://www.ddmboss.com/tags/docker-compose/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WordPress Docker Development Set-Up with Traefik, Redis, and Nginx</title>
-      <link>https://ddmboss.github.io/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/</link>
+      <link>https://www.ddmboss.com/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/</link>
       <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
       
-      <guid>https://ddmboss.github.io/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/</guid>
+      <guid>https://www.ddmboss.com/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/</guid>
       <description>Hey there, today I am going to walk you through setting up a WordPress Development using Docker, Traefik, Redis and Nginx.</description>
     </item>
     
     <item>
       <title>Advanced WordPress Development Environment with Docker, Traefik, and Redis</title>
-      <link>https://ddmboss.github.io/posts/advanced-wordpress-development-environment-with-docker-traefik-and-redis/</link>
+      <link>https://www.ddmboss.com/posts/advanced-wordpress-development-environment-with-docker-traefik-and-redis/</link>
       <pubDate>Sun, 02 Jan 2022 15:52:03 +0000</pubDate>
       
-      <guid>https://ddmboss.github.io/posts/advanced-wordpress-development-environment-with-docker-traefik-and-redis/</guid>
+      <guid>https://www.ddmboss.com/posts/advanced-wordpress-development-environment-with-docker-traefik-and-redis/</guid>
       <description>Hey there, today I&amp;rsquo;m going to walk you through how to setup an advanced WordPress development environment, using Docker, Traefik, and Redis.</description>
     </item>
     
     <item>
       <title>Set-Up A Simple WordPress Development Environment Using Docker Desktop</title>
-      <link>https://ddmboss.github.io/posts/set-up-a-simple-wordpress-development-environment-using-docker-desktop/</link>
+      <link>https://www.ddmboss.com/posts/set-up-a-simple-wordpress-development-environment-using-docker-desktop/</link>
       <pubDate>Fri, 15 Oct 2021 12:33:10 +0000</pubDate>
       
-      <guid>https://ddmboss.github.io/posts/set-up-a-simple-wordpress-development-environment-using-docker-desktop/</guid>
+      <guid>https://www.ddmboss.com/posts/set-up-a-simple-wordpress-development-environment-using-docker-desktop/</guid>
       <description>Hey there, today I’m going to walk you through how to setup a basic WordPress Development environment using Docker.</description>
     </item>
     
