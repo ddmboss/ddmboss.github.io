@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright © Delano Maloney; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 19 Jan 2022 13:25:41 +0800</lastBuildDate><atom:link href="https://www.ddmboss.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Aug 2022 20:30:00 +0800</lastBuildDate><atom:link href="https://www.ddmboss.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Simple Ghost Development Environment Setup Using Docker and MariaDB</title>
+      <link>https://www.ddmboss.com/posts/simple-ghost-development-environment-setup-using-docker-and-mariadb/</link>
+      <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
+      
+      <guid>https://www.ddmboss.com/posts/simple-ghost-development-environment-setup-using-docker-and-mariadb/</guid>
+      <description>Hey there, today I’m going to walk you through how to setup a basic Ghost Development environment using Docker.</description>
+    </item>
+    
     <item>
       <title>WordPress Docker Development Set-Up with Traefik, Redis, and Nginx</title>
       <link>https://www.ddmboss.com/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/</link>

@@ -7,11 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright © Delano Maloney; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 19 Jan 2022 13:25:41 +0800</lastBuildDate><atom:link href="https://www.ddmboss.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Aug 2022 20:30:00 +0800</lastBuildDate><atom:link href="https://www.ddmboss.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blogging</title>
+      <link>https://www.ddmboss.com/tags/blogging/</link>
+      <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
+      
+      <guid>https://www.ddmboss.com/tags/blogging/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Docker</title>
       <link>https://www.ddmboss.com/tags/docker/</link>
-      <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
+      <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
       
       <guid>https://www.ddmboss.com/tags/docker/</guid>
       <description></description>
@@ -20,7 +29,7 @@
     <item>
       <title>Docker Compose</title>
       <link>https://www.ddmboss.com/tags/docker-compose/</link>
-      <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
+      <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
       
       <guid>https://www.ddmboss.com/tags/docker-compose/</guid>
       <description></description>
@@ -29,9 +38,36 @@
     <item>
       <title>Docker Desktop</title>
       <link>https://www.ddmboss.com/tags/docker-desktop/</link>
-      <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
+      <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
       
       <guid>https://www.ddmboss.com/tags/docker-desktop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ghost</title>
+      <link>https://www.ddmboss.com/tags/ghost/</link>
+      <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
+      
+      <guid>https://www.ddmboss.com/tags/ghost/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MariaDB</title>
+      <link>https://www.ddmboss.com/tags/mariadb/</link>
+      <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
+      
+      <guid>https://www.ddmboss.com/tags/mariadb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tutorials</title>
+      <link>https://www.ddmboss.com/tags/tutorials/</link>
+      <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
+      
+      <guid>https://www.ddmboss.com/tags/tutorials/</guid>
       <description></description>
     </item>
     
@@ -59,15 +95,6 @@
       <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
       
       <guid>https://www.ddmboss.com/tags/traefik/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tutorials</title>
-      <link>https://www.ddmboss.com/tags/tutorials/</link>
-      <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
-      
-      <guid>https://www.ddmboss.com/tags/tutorials/</guid>
       <description></description>
     </item>
     
