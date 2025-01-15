@@ -4,126 +4,101 @@
     <title>Tags on ddmboss</title>
     <link>https://www.ddmboss.com/tags/</link>
     <description>Recent content in Tags on ddmboss</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <copyright>Copyright © Delano Maloney; all rights reserved.</copyright>
-    <lastBuildDate>Tue, 09 Aug 2022 20:30:00 +0800</lastBuildDate><atom:link href="https://www.ddmboss.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Aug 2022 20:30:00 +0800</lastBuildDate>
+    <atom:link href="https://www.ddmboss.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Blogging</title>
       <link>https://www.ddmboss.com/tags/blogging/</link>
       <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/blogging/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Docker</title>
       <link>https://www.ddmboss.com/tags/docker/</link>
       <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/docker/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Docker Compose</title>
       <link>https://www.ddmboss.com/tags/docker-compose/</link>
       <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/docker-compose/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Docker Desktop</title>
       <link>https://www.ddmboss.com/tags/docker-desktop/</link>
       <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/docker-desktop/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Ghost</title>
       <link>https://www.ddmboss.com/tags/ghost/</link>
       <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/ghost/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>MariaDB</title>
       <link>https://www.ddmboss.com/tags/mariadb/</link>
       <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/mariadb/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Tutorials</title>
       <link>https://www.ddmboss.com/tags/tutorials/</link>
       <pubDate>Tue, 09 Aug 2022 20:30:00 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/tutorials/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Nginx</title>
       <link>https://www.ddmboss.com/tags/nginx/</link>
       <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/nginx/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Redis</title>
       <link>https://www.ddmboss.com/tags/redis/</link>
       <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/redis/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Traefik</title>
       <link>https://www.ddmboss.com/tags/traefik/</link>
       <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/traefik/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Web Development</title>
       <link>https://www.ddmboss.com/tags/web-development/</link>
       <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/web-development/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>WordPress</title>
       <link>https://www.ddmboss.com/tags/wordpress/</link>
       <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/wordpress/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Blog</title>
       <link>https://www.ddmboss.com/tags/blog/</link>
       <pubDate>Fri, 08 Oct 2021 12:48:56 +0000</pubDate>
-      
       <guid>https://www.ddmboss.com/tags/blog/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

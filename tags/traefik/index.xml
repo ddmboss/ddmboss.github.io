@@ -4,27 +4,24 @@
     <title>Traefik on ddmboss</title>
     <link>https://www.ddmboss.com/tags/traefik/</link>
     <description>Recent content in Traefik on ddmboss</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <copyright>Copyright © Delano Maloney; all rights reserved.</copyright>
-    <lastBuildDate>Wed, 19 Jan 2022 13:25:41 +0800</lastBuildDate><atom:link href="https://www.ddmboss.com/tags/traefik/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jan 2022 13:25:41 +0800</lastBuildDate>
+    <atom:link href="https://www.ddmboss.com/tags/traefik/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WordPress Docker Development Set-Up with Traefik, Redis, and Nginx</title>
       <link>https://www.ddmboss.com/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/</link>
       <pubDate>Wed, 19 Jan 2022 13:25:41 +0800</pubDate>
-      
       <guid>https://www.ddmboss.com/posts/wordpress-docker-development-set-up-with-traefik-redis-and-nginx/</guid>
       <description>Hey there, today I am going to walk you through setting up a WordPress Development using Docker, Traefik, Redis and Nginx.</description>
     </item>
-    
     <item>
       <title>Advanced WordPress Development Environment with Docker, Traefik, and Redis</title>
       <link>https://www.ddmboss.com/posts/advanced-wordpress-development-environment-with-docker-traefik-and-redis/</link>
       <pubDate>Sun, 02 Jan 2022 15:52:03 +0000</pubDate>
-      
       <guid>https://www.ddmboss.com/posts/advanced-wordpress-development-environment-with-docker-traefik-and-redis/</guid>
       <description>Hey there, today I&amp;rsquo;m going to walk you through how to setup an advanced WordPress development environment, using Docker, Traefik, and Redis.</description>
     </item>
-    
   </channel>
 </rss>
